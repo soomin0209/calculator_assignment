@@ -55,8 +55,12 @@ public class Main {
             System.out.print("첫 번째 계산 결과를 삭제하시겠습니까? (yes 입력 시 삭제): ");
             String remove = sc.next();
             if (remove.equals("yes")){
-                calculator.removeResult();
-                System.out.println("=== 삭제 완료 : " + calculator.getResults() + " ===");
+                boolean removed = calculator.removeResult();    // 삭제 성공 여부 반환
+                if (removed) {
+                    System.out.println("=== 삭제 완료 : " + calculator.getResults() + " ===");
+                } else {
+                    System.out.println("*** 삭제할 계산 결과가 없습니다 ***");
+                }
             }
 
             // Setter 메서드 활용

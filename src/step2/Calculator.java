@@ -43,7 +43,12 @@ public class Calculator {
         this.results = results;
     }
 
-    public void removeResult() {
-        results.remove(0);
+    public boolean removeResult() { // 삭제 성공 여부 반환을 위해 boolean으로 변경
+        try {
+            results.remove(0);
+            return true;    // 삭제 성공
+        } catch (IndexOutOfBoundsException e){
+            return false;   // 삭제 실패
+        }
     }
 }
