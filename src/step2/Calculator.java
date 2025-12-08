@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Calculator {
 
-    ArrayList<Integer> results = new ArrayList<>();
+    // private으로 캡슐화
+    private ArrayList<Integer> results = new ArrayList<>();
 
     public int calculate(int num1, int num2, char op) {
         int result = 0;
@@ -30,5 +31,15 @@ public class Calculator {
 
         results.add(result);
         return result;
+    }
+
+    // Getter 메서드
+    public ArrayList<Integer> getResults() {
+        return results;
+    }
+
+    // Setter 메서드
+    public void setResults(ArrayList<Integer> results) {
+        this.results = results;
     }
 }
