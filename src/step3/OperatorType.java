@@ -36,4 +36,14 @@ public enum OperatorType {
     OperatorType(char op) { // 생성자 - 자동 private
         this.op = op;
     }
+
+    // char 타입으로 입력받은 기호를 Enum 상수로 변환
+    public static OperatorType fromChar(char op) {
+        for (OperatorType type : OperatorType.values()) {
+            if (type.op == op) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("*** 잘못된 연산 기호 입니다 ***");
+    }
 }
