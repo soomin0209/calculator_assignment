@@ -1,5 +1,6 @@
 package step2;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -41,12 +42,21 @@ public class Main {
             try {
                 int result = calculator.calculate(num1, num2, op);
                 System.out.println("결과: " + result);
+                // Getter 메서드 활용
+                System.out.println("계산 결과 조회: " + calculator.getResults());
             } catch (ArithmeticException ae) {
                 System.out.println(ae.getMessage());
             } catch (IllegalArgumentException ie) {
                 System.out.println(ie.getMessage());
             }
             System.out.println();
+
+            // Setter 메서드 활용
+            System.out.print("계산 결과를 초기화 하시겠습니까? (yes 입력 시 초기화): ");
+            String reset = sc.next();
+            if (reset.equals("yes")) {
+                calculator.setResults(new ArrayList<>());   // 새 ArrayList로 초기화
+            }
 
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료): ");
             String choice = sc.next();
