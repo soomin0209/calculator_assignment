@@ -51,11 +51,20 @@ public class Main {
             }
             System.out.println();
 
+            // removeResult() 활용
+            System.out.print("첫 번째 계산 결과를 삭제하시겠습니까? (yes 입력 시 삭제): ");
+            String remove = sc.next();
+            if (remove.equals("yes")){
+                calculator.removeResult();
+                System.out.println("=== 삭제 완료 : " + calculator.getResults() + " ===");
+            }
+
             // Setter 메서드 활용
             System.out.print("계산 결과를 초기화 하시겠습니까? (yes 입력 시 초기화): ");
             String reset = sc.next();
             if (reset.equals("yes")) {
-                calculator.setResults(new ArrayList<>());   // 새 ArrayList로 초기화
+                calculator.setResults(new ArrayList<>());   // Setter 호출 -> 새 ArrayList로 초기화
+                System.out.println("=== 초기화 완료: " + calculator.getResults() + " ===");
             }
 
             System.out.print("더 계산하시겠습니까? (exit 입력 시 종료): ");
