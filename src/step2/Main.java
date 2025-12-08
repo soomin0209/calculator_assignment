@@ -57,7 +57,7 @@ public class Main {
             if (remove.equals("yes")){
                 boolean removed = calculator.removeResult();    // 삭제 성공 여부 반환
                 if (removed) {
-                    System.out.println("=== 삭제 완료 : " + calculator.getResults() + " ===");
+                    System.out.println("=== 삭제 완료: " + calculator.getResults() + " ===");
                 } else {
                     System.out.println("*** 삭제할 계산 결과가 없습니다 ***");
                 }
