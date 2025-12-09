@@ -36,13 +36,13 @@ public class ArithmeticCalculator <T extends Number> {
     }
 
     // 문자열을 Integer 또는 Double로 파싱
-    public static Number parseNumber(String str) {
+    public static Number parseNumber(String input) {
         try {
             // 소수점이 없으면 Integer로 파싱
-            if (!str.contains(".")) {
-                return Integer.parseInt(str);
+            if (!input.contains(".")) {
+                return Integer.parseInt(input);
             } else {
-                return Double.parseDouble(str);
+                return Double.parseDouble(input);
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("*** 올바른 숫자를 입력해주세요 ***");
