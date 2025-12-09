@@ -11,7 +11,7 @@ public class Main {
 
         while (true) {
             System.out.print("첫 번째 수를 입력해주세요: ");
-            String input1 = sc.next();
+            String input1 = sc.next();  // parseNumber() 메서드를 호출해 정수/실수를 판별하기 위해 String 형태로 입력받음
             Number num1 = null;
             while (num1 == null || num1.doubleValue() < 0) {
                 try {
@@ -48,24 +48,39 @@ public class Main {
             System.out.println();
 
             System.out.print("사칙연산 기호를 입력하세요(+, -, *, /): ");
-            String input = sc.next();
-            if (input.equals("exit")) {
+            String inputOp = sc.next();
+            if (inputOp.equals("exit")) {
                 break;
             }
 
-            if (input.length() != 1) {
+            if (inputOp.length() != 1) {
                 System.out.println("*** 연산 기호는 한 글자만 입력해주세요 ***");
                 System.out.println();
                 continue;
             }
 
-            char op = input.charAt(0);
+            char op = inputOp.charAt(0);
 
             try {
                 Number result = arithmeticCalculator.calculate(num1, num2, op);
                 System.out.println("결과: " + result);
                 // Getter 메서드 활용
                 System.out.println("계산 결과 조회: " + arithmeticCalculator.getResults());
+                // 입력 받은 수보다 큰 계산 결과들 출력
+                System.out.print("계산 결과와 비교할 수를 입력해주세요: ");
+                String inputNum = sc.next();
+                Number num = null;
+                while (num == null) {
+                    try {
+                        num = ArithmeticCalculator.parseNumber(inputNum);
+                    } catch (IllegalArgumentException e){
+                        System.out.println(e.getMessage());
+                        System.out.print("다시 입력해주세요: ");
+                        inputNum = sc.next();
+                    }
+                }
+                System.out.println("입력 받은 수보다 큰 계산 결과 조회: " + arithmeticCalculator.getBiggerResults(num));
+
             } catch (ArithmeticException ae) {
                 System.out.println(ae.getMessage());
             } catch (IllegalArgumentException ie) {
