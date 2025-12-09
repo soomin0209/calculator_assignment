@@ -2,25 +2,25 @@ package step3;
 
 import java.util.ArrayList;
 
-public class ArithmeticCalculator {
+public class ArithmeticCalculator <T extends Number> {
 
     // private으로 캡슐화
-    private ArrayList<Integer> results = new ArrayList<>();
+    private ArrayList<T> results = new ArrayList<>();
 
-    public int calculate(int num1, int num2, char op) {
+    public T calculate(T num1, T num2, char op) {
         OperatorType operatorType = OperatorType.fromChar(op);
-        int result = operatorType.calculate(num1, num2);
+        T result = operatorType.calculate(num1, num2);
         results.add(result);
         return result;
     }
 
     // Getter 메서드
-    public ArrayList<Integer> getResults() {
+    public ArrayList<T> getResults() {
         return results;
     }
 
     // Setter 메서드
-    public void setResults(ArrayList<Integer> results) {
+    public void setResults(ArrayList<T> results) {
         this.results = results;
     }
 
@@ -30,6 +30,20 @@ public class ArithmeticCalculator {
             return true;    // 삭제 성공
         } catch (IndexOutOfBoundsException e){
             return false;   // 삭제 실패
+        }
+    }
+
+    // 문자열을 Integer 또는 Double로 파싱
+    public static Number parseNumber(String str) {
+        try {
+            // 소수점이 없으면 Integer로 파싱
+            if (!str.contains(".")) {
+                return Integer.parseInt(str);
+            } else {
+                return Double.parseDouble(str);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("*** 올바른 숫자를 입력해주세요 ***");
         }
     }
 }

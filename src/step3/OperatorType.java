@@ -4,34 +4,38 @@ public enum OperatorType {
 
     ADD('+') {
         @Override
-        public int calculate(int num1, int num2) {
-            return num1 + num2;
+        public <T extends Number> T calculate(T num1, T num2) {
+            double result = num1.doubleValue() + num2.doubleValue();
+            return (T) convertToType(num1, num2, result);
         }
     },
     SUBTRACT('-') {
         @Override
-        public int calculate(int num1, int num2) {
-            return num1 - num2;
+        public <T extends Number> T calculate(T num1, T num2) {
+            double result = num1.doubleValue() - num2.doubleValue();
+            return (T) convertToType(num1, num2, result);
         }
     },
     MULTIPLY('*') {
         @Override
-        public int calculate(int num1, int num2) {
-            return num1 * num2;
+        public <T extends Number> T calculate(T num1, T num2) {
+            double result = num1.doubleValue() * num2.doubleValue();
+            return (T) convertToType(num1, num2, result);
         }
     },
     DIVIDE('/') {
         @Override
-        public int calculate(int num1, int num2) {
-            if (num2 == 0 ) {
+        public <T extends Number> T calculate(T num1, T num2) {
+            if (num2.doubleValue() == 0.0 ) {
                 throw new ArithmeticException("*** 나누는 수는 0이 입력될 수 없습니다 ***");
             }
-            return num1 / num2;
+            double result = num1.doubleValue() / num2.doubleValue();
+            return (T) convertToType(num1, num2, result);
         }
     };
 
     private final char op;  // Enum 상수가 가진 값 저장
-    public abstract int calculate(int num1, int num2);
+    public abstract <T extends Number> T calculate(T num1, T num2);
 
     OperatorType(char op) { // 생성자 - 자동 private
         this.op = op;
@@ -45,5 +49,17 @@ public enum OperatorType {
             }
         }
         throw new IllegalArgumentException("*** 잘못된 연산 기호 입니다 ***");
+    }
+
+    private static Number convertToType(Number num1, Number num2, double result) {
+        // 둘 중 하나라도 Double이면 결과도 Double
+        if (num1 instanceof Double || num2 instanceof Double) {
+            return result;
+        }
+        // 둘 다 Integer면 결과도 Integer
+        if (num1 instanceof Integer && num2 instanceof Integer) {
+            return (int) result;
+        }
+        return result;
     }
 }

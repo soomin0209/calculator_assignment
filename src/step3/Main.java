@@ -7,21 +7,43 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
+        ArithmeticCalculator<Number> arithmeticCalculator = new ArithmeticCalculator<>();
 
         while (true) {
-            System.out.print("첫 번째 정수를 입력해주세요: ");
-            int num1 = sc.nextInt();
-            while (num1 < 0) {
-                System.out.print("0 이상의 정수로 다시 입력해주세요: ");
-                num1 = sc.nextInt();
+            System.out.print("첫 번째 수를 입력해주세요: ");
+            String input1 = sc.next();
+            Number num1 = null;
+            while (num1 == null || num1.doubleValue() < 0) {
+                try {
+                    num1 = ArithmeticCalculator.parseNumber(input1);
+                    if (num1.doubleValue() < 0) {
+                        System.out.print("0 이상의 수로 다시 입력해주세요: ");
+                        input1 = sc.next();
+                        num1 = null;
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                    System.out.print("0 이상의 수로 다시 입력해주세요: ");
+                    input1 = sc.next();
+                }
             }
 
-            System.out.print("두 번째 정수를 입력해주세요: ");
-            int num2 = sc.nextInt();
-            while (num2 < 0) {
-                System.out.print("0 이상의 정수로 다시 입력해주세요: ");
-                num2 = sc.nextInt();
+            System.out.print("두 번째 수를 입력해주세요: ");
+            String input2 = sc.next();
+            Number num2 = null;
+            while (num2 == null || num2.doubleValue() < 0) {
+                try {
+                    num2 = ArithmeticCalculator.parseNumber(input2);
+                    if (num2.doubleValue() < 0) {
+                        System.out.print("0 이상의 수로 다시 입력해주세요: ");
+                        input2 = sc.next();
+                        num2 = null;
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                    System.out.print("0 이상의 수로 다시 입력해주세요: ");
+                    input2 = sc.next();
+                }
             }
             System.out.println();
 
@@ -40,7 +62,7 @@ public class Main {
             char op = input.charAt(0);
 
             try {
-                int result = arithmeticCalculator.calculate(num1, num2, op);
+                Number result = arithmeticCalculator.calculate(num1, num2, op);
                 System.out.println("결과: " + result);
                 // Getter 메서드 활용
                 System.out.println("계산 결과 조회: " + arithmeticCalculator.getResults());
