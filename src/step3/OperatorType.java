@@ -51,6 +51,7 @@ public enum OperatorType {
         throw new IllegalArgumentException("*** 잘못된 연산 기호 입니다 ***");
     }
 
+    // 결과 값 타입 결정하는 메서드
     private static Number convertToType(Number num1, Number num2, double result) {
         // 둘 중 하나라도 Double이면 결과도 Double
         if (num1 instanceof Double || num2 instanceof Double) {

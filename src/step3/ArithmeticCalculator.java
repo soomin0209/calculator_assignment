@@ -12,6 +12,7 @@ public class ArithmeticCalculator <T extends Number> {
     public T calculate(T num1, T num2, char op) {
         OperatorType operatorType = OperatorType.fromChar(op);
         T result = operatorType.calculate(num1, num2);
+        // 결과를 배열리스트에 저장
         results.add(result);
         return result;
     }
@@ -26,6 +27,7 @@ public class ArithmeticCalculator <T extends Number> {
         this.results = results;
     }
 
+    // 첫 번째 결과 삭제 메서드
     public boolean removeResult() { // 삭제 성공 여부 반환을 위해 boolean으로 변경
         try {
             results.remove(0);
@@ -41,10 +43,10 @@ public class ArithmeticCalculator <T extends Number> {
             // 소수점이 없으면 Integer로 파싱
             if (!input.contains(".")) {
                 return Integer.parseInt(input);
-            } else {
+            } else {    // 소수점이 있으면 Double로 파싱
                 return Double.parseDouble(input);
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException e) { // Number가 아닐 경우 예외 처리
             throw new IllegalArgumentException("*** 올바른 숫자를 입력해주세요 ***");
         }
     }
